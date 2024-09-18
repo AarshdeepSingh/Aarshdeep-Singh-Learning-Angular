@@ -8,10 +8,22 @@
     <title>Aarshdeep-Singh-Angular-Learning</title>
   </head>
   <body>
-  <div>
-    <h1>Learning Angular</h1>
-    <h2>Name: {{name}}</h2>
-    <h2>Age: {{age}}</h2>
+  <div *ngFor="let product of products">
+    <div class="pokemon-cards">
+        <h2>{{product.name}}</h2>
+        <p>{{product.description}}</p>
+        <p>price: ${{product.price}}</p>
+
+      <!-- image not exist currently -->
+        <div *ngIf="product.image">
+          <img [src]="product.image" alt="{{product.name}}">
+        </div>
+
+        <p *ngIf="product.rarity">rarity: {{product.rarity}}</p>
+
+      <button>Add to cart</button>
+
+    </div>
   </div>
   </body>
 </html>
