@@ -11,9 +11,6 @@ import {NgForOf, NgIf} from "@angular/common";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Aarshdeep-Singh-Learning-Angular';
-  name : String = 'Aarshdeep Singh';
-  age : number = 20;
 
   products: product[] = [
     {id: 1, name: 'Starter pack', description: 'contain starter pokemon cards', price: 10, image: '',rarity: 'uncommon'},//no image for now
