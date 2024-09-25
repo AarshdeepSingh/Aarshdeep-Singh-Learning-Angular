@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {product} from "./project.interface";
 import {NgForOf, NgIf} from "@angular/common";
+import {PokemonCardsListComponent} from "./pokemon-cards-list/pokemon-cards-list.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgForOf, NgIf],
+  imports: [RouterOutlet, NgForOf, NgIf, PokemonCardsListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
