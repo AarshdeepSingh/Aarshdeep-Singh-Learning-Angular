@@ -10,5 +10,5 @@ import {PokemonCardsListComponent} from "../pokemon-cards-list/pokemon-cards-lis
 })
 export class PokemonCardsListItemComponent {
   // @ts-ignore
-  @input() contentItem! : PokemonCardsList;
+  @input() contentItem! : PokemonCards[];
 }
