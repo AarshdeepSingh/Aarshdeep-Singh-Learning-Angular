@@ -32,4 +32,6 @@ export class PokemonCardsListComponent {
     {id: 6, name: 'gen-2 pack', description: 'contain only gen-2 pokemon cards', price: 12, image: ''}
   ]
 
+
+  protected readonly PokemonCardsListItemComponent = PokemonCardsListItemComponent;
 }

@@ -4,10 +4,9 @@
   </head>
   <body>
 
-  <app-pokemon-cards-list-item></app-pokemon-cards-list-item>
-  <app-pokemon-cards-list-item></app-pokemon-cards-list-item>
-  <app-pokemon-cards-list-item></app-pokemon-cards-list-item>
-  <app-pokemon-cards-list-item></app-pokemon-cards-list-item>
+  <div *ngFor="let card of contentItems">
+    <app-pokemon-cards-list-item [pokemonCards] = "card"></app-pokemon-cards-list-item>
+  </div>
 
 <!--    <h2> Pokemon Cards </h2>-->
 <!--    <ul>-->
