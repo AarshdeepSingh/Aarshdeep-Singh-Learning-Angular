@@ -4,16 +4,12 @@
   </head>
   <body>
 
-  <div *ngFor="let card of contentItems">
-    <app-pokemon-cards-list-item [pokemonCards] = "card"></app-pokemon-cards-list-item>
+  <div *ngFor="let card of contentItems; let i = index">
+    <app-pokemon-cards-list-item
+      [pokemonCards]="card"
+      [ngStyle]="{'background-color': i % 2 === 0 ? 'red' : 'blue'}">
+    </app-pokemon-cards-list-item>
   </div>
 
-<!--    <h2> Pokemon Cards </h2>-->
-<!--    <ul>-->
-<!--      <li *ngFor="let item of contentItems" >-->
-<!--        <h3>{{item.name}}</h3>-->
-<!--        <p>desc: {{item.description}} | rarity: {{item.rarity}}</p>-->
-<!--      </li>-->
-<!--    </ul>-->
   </body>
 </html>

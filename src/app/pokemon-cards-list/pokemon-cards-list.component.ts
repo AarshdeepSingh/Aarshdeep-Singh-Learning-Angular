@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {PokemonCardsListItemComponent} from "../pokemon-cards-list-item/pokemon-cards-list-item.component";
+import {NgStyle} from "@angular/common";
 
 interface PokemonCards {
   id: number;
@@ -15,7 +16,8 @@ interface PokemonCards {
   selector: 'app-pokemon-cards-list',
   standalone: true,
   imports: [
-    PokemonCardsListItemComponent
+    PokemonCardsListItemComponent,
+    NgStyle
   ],
   templateUrl: './pokemon-cards-list.component.html',
   styleUrl: './pokemon-cards-list.component.css'
