@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {Component, Input, input} from '@angular/core';
 import {PokemonCardsListComponent} from "../pokemon-cards-list/pokemon-cards-list.component";
 
 @Component({
@@ -9,6 +9,6 @@ import {PokemonCardsListComponent} from "../pokemon-cards-list/pokemon-cards-lis
   styleUrl: './pokemon-cards-list-item.component.css'
 })
 export class PokemonCardsListItemComponent {
-  // @ts-ignore
-  @Input() pokemonCards! : {id: number; name: string; description: string; imageUrl: string;};
+
+  @Input() pokemonCard!: { id: number; name: string; description: string; imageUrl: string };
 }

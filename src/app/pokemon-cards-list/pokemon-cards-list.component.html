@@ -6,7 +6,7 @@
 
   <div *ngFor="let card of contentItems; let i = index">
     <app-pokemon-cards-list-item
-      [pokemonCards]="card"
+      [pokemonCard]="card"
       [ngStyle]="{'background-color': i % 2 === 0 ? 'red' : 'blue'}">
     </app-pokemon-cards-list-item>
   </div>
