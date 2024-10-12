@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PokemonCardsListComponent} from "../pokemon-cards-list/pokemon-cards-list.component";
 import {PokemonCards} from "../project.interface";
 
@@ -9,7 +9,13 @@ import {PokemonCards} from "../project.interface";
   templateUrl: './pokemon-cards-list-item.component.html',
   styleUrl: './pokemon-cards-list-item.component.css'
 })
-export class PokemonCardsListItemComponent {
+export class PokemonCardsListItemComponent implements OnInit{
 
   @Input() pokemonCards!: PokemonCards;
+
+  constructor() {
+  }
+  ngOnInit(): void {
+    console.log('Game item',this.pokemonCards);
+  }
 }

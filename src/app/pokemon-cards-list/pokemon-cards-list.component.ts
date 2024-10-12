@@ -1,15 +1,8 @@
-import { Component } from '@angular/core';
-import {PokemonCardsListItemComponent} from "../pokemon-cards-list-item/pokemon-cards-list-item.component";
-import {NgClass, NgForOf, NgStyle} from "@angular/common";
-
-interface PokemonCards {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  // optional
-  rarity?: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { PokemonCardsListItemComponent } from "../pokemon-cards-list-item/pokemon-cards-list-item.component";
+import { NgClass, NgForOf, NgStyle } from "@angular/common";
+import { PokemonCardsService } from "../service/Pokemon-Cards-service.service"; // Import the service
+import { PokemonCards } from "../project.interface"; // Ensure this is imported correctly
 
 @Component({
   selector: 'app-pokemon-cards-list',
@@ -21,20 +14,19 @@ interface PokemonCards {
     NgForOf
   ],
   templateUrl: './pokemon-cards-list.component.html',
-  styleUrl: './pokemon-cards-list.component.css'
+  styleUrls: ['./pokemon-cards-list.component.css'] // Corrected to plural
 })
+export class PokemonCardsListComponent implements OnInit {
 
-export class PokemonCardsListComponent {
+  PokemonCardsList: PokemonCards[] = [];
 
-  contentItems: PokemonCards[] = [
-    {id: 1, name: 'Starter pack', description: 'contain starter pokemon cards', price: 10,rarity: 'uncommon'},//no image for now
-    {id: 2, name: 'Basic pack', description: 'contain Basic pokemon cards', price: 5, rarity:'common'},
-    {id: 3, name: 'Legendary pack', description: 'may contain legendary pokemon cards', price: 25, rarity: 'ultra rare'},
-    {id: 4, name: 'Mythical pack', description: 'may contain mythical pokemon cards', price: 20, rarity: 'rare'},
-    {id: 5, name: 'gen-1 pack', description: 'contain only gen-1 pokemon cards', price: 12},
-    {id: 6, name: 'gen-2 pack', description: 'contain only gen-2 pokemon cards', price: 12}
-  ]
+  constructor(private pokemonCardsService: PokemonCardsService) {} // Use the correct type here
 
-
-   protected readonly PokemonCardsListItemComponent = PokemonCardsListItemComponent;
+  ngOnInit(): void {
+    this.pokemonCardsService.getPokemonCards().subscribe({
+      next: (data: PokemonCards[]) => this.PokemonCardsList = data,
+      error: (err: any) => console.error("Error fetching Pokemon cards", err),
+      complete: () => console.log("Pokemon cards data fetch complete")
+    });
+  }
 }
