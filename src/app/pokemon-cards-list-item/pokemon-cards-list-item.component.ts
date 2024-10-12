@@ -1,5 +1,6 @@
-import {Component, Input, input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {PokemonCardsListComponent} from "../pokemon-cards-list/pokemon-cards-list.component";
+import {PokemonCards} from "../project.interface";
 
 @Component({
   selector: 'app-pokemon-cards-list-item',
@@ -10,5 +11,5 @@ import {PokemonCardsListComponent} from "../pokemon-cards-list/pokemon-cards-lis
 })
 export class PokemonCardsListItemComponent {
 
-  @Input() pokemonCard!: { id: number; name: string; description: string; imageUrl: string };
+  @Input() pokemonCards!: PokemonCards;
 }

@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+.even {
+  background-color: #fa4747;
+}
+
+.odd {
+  background-color: lightblue;
+}
+
+div {
+  text-decoration-color: white;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+button {
+  padding: 0.5em;
+  border: 1px solid green;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+}

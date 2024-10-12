@@ -1,9 +1,8 @@
-export interface product {
+export interface PokemonCards {
   id: number;
   name: string;
   description: string;
   price: number;
-  image: string;
   // optional
   rarity?: string;
 }

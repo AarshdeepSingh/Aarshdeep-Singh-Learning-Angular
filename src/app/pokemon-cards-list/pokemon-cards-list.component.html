@@ -4,10 +4,8 @@
   </head>
   <body>
 
-  <div *ngFor="let card of contentItems; let i = index">
-    <app-pokemon-cards-list-item
-      [pokemonCard]="card"
-      [ngStyle]="{'background-color': i % 2 === 0 ? 'red' : 'blue'}">
+  <div *ngFor="let card of contentItems; let i = index" [ngClass] = "{'even': i%2 == 0, 'odd':i%2 != 0}">
+    <app-pokemon-cards-list-item [pokemonCards]="card" [ngStyle]="{'background-color': i % 2 === 0 ? 'red' : 'blue'}">
     </app-pokemon-cards-list-item>
   </div>
 
