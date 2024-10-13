@@ -1,0 +1,25 @@
+nav {
+  background-color: greenyellow;
+  padding: 1em;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  margin-right: 2em;
+}
+
+ul li a {
+  text-decoration: none;
+  transition: background-color 0.3s;
+
+}
+
+ul li a:hover {
+  text-decoration: underline;
+}
