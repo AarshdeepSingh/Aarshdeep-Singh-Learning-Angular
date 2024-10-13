@@ -5,4 +5,5 @@ export interface PokemonCards {
   price: number;
   // optional
   rarity?: string;
+  imageUrl?: string;
 }

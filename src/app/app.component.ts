@@ -5,6 +5,7 @@ import { NgForOf, NgIf } from "@angular/common";
 import { PokemonCardsListComponent } from "./pokemon-cards-list/pokemon-cards-list.component";
 import { PokemonCardsListItemComponent } from "./pokemon-cards-list-item/pokemon-cards-list-item.component";
 import { PokemonCardsService } from './service/Pokemon-Cards-service.service';
+import {NavbarComponent} from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import { PokemonCardsService } from './service/Pokemon-Cards-service.service';
     NgForOf,
     NgIf,
     PokemonCardsListItemComponent,
-    PokemonCardsListComponent
+    PokemonCardsListComponent,
+    NavbarComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
