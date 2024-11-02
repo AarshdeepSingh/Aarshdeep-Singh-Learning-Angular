@@ -42,7 +42,7 @@ describe('AppComponent', () => {
 
     app.ngOnInit();
 
-    expect(app.PokemonCard).toEqual(mockCard);
+    expect(app.PokemonCards).toEqual(mockCard);
     expect(pokemonCardsServiceSpy.getPokemonCardsById).toHaveBeenCalledWith(1);
   });
 
