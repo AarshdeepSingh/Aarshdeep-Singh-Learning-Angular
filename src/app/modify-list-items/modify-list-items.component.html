@@ -1,1 +1,29 @@
-<p>modify-list-items works!</p>
+<form [formGroup]="modifyForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name:</label>
+    <input id="name" formControlName="name" type="text">
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <input id="description" formControlName="description" type="text">
+  </div>
+
+  <div>
+    <label for="price">Price:</label>
+    <input id="price" formControlName="price" type="text">
+  </div>
+
+  <div>
+    <label for="rarity">Rarity:</label>
+    <input id="rarity" formControlName="rarity" type="text">
+  </div>
+
+  <div>
+    <label for="imageUrl">Image URL:</label>
+    <input id="imageUrl" formControlName="imageUrl" type="text">
+  </div>
+
+  <button type="submit" *ngIf="!isEditing">Add Item</button>
+  <button type="submit" *ngIf="isEditing">Update Item</button>
+</form>

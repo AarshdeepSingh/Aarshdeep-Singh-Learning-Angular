@@ -1,13 +1,18 @@
 <html>
-  <head>
-    <title> pokemon cards list </title>
-  </head>
-  <body>
+<head>
+  <title> Pokémon Cards List </title>
+</head>
+<body>
 
-  <div *ngFor="let card of PokemonCardsList; let i = index" [ngClass] = "{'even': i%2 == 0, 'odd':i%2 != 0}">
-    <app-pokemon-cards-list-item [pokemonCards]="card" [ngStyle]="{'background-color': i % 2 === 0 ? 'red' : 'blue'}">
-    </app-pokemon-cards-list-item>
-  </div>
+<div *ngFor="let card of PokemonCardsList; let i = index" [ngClass]="{'even': i % 2 === 0, 'odd': i % 2 !== 0}">
+  <app-pokemon-cards-list-item [pokemonCards]="card" [ngStyle]="{'background-color': i % 2 === 0 ? 'red' : 'blue'}">
+  </app-pokemon-cards-list-item>
 
-  </body>
+  <button (click)="editItem(card)">Edit</button>
+  <button (click)="deleteItem(card.id)">Delete</button>
+</div>
+
+<button (click)="goToAddItem()">Add New Item</button>
+
+</body>
 </html>
