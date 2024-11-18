@@ -8,6 +8,7 @@ import { PokemonCardsService } from './service/Pokemon-Cards-service.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import {DataPipePipe} from "./data-pipe.pipe";
 import {PokemonCardsList} from "./Data/Pokemon-Cards-content";
+import {BoldCardNamePipe} from "./bold-card-name.pipe";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ import {PokemonCardsList} from "./Data/Pokemon-Cards-content";
     CurrencyPipe,
     DataPipePipe,
     NgClass,
-    NgStyle
+    NgStyle,
+    BoldCardNamePipe
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
