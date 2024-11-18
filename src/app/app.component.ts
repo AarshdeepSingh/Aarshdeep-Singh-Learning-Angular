@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PokemonCards } from "./project.interface";
-import { NgForOf, NgIf } from "@angular/common";
-import { PokemonCardsListComponent } from "./pokemon-cards-list/pokemon-cards-list.component";
-import { PokemonCardsListItemComponent } from "./pokemon-cards-list-item/pokemon-cards-list-item.component";
+import { PokemonCards } from './project.interface';
+import {CurrencyPipe, NgClass, NgForOf, NgIf, NgStyle, UpperCasePipe} from '@angular/common';
+import { PokemonCardsListComponent } from './pokemon-cards-list/pokemon-cards-list.component';
+import { PokemonCardsListItemComponent } from './pokemon-cards-list-item/pokemon-cards-list-item.component';
 import { PokemonCardsService } from './service/Pokemon-Cards-service.service';
-import {NavbarComponent} from './navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import {DataPipePipe} from "./data-pipe.pipe";
+import {PokemonCardsList} from "./Data/Pokemon-Cards-content";
 
 @Component({
   selector: 'app-root',
@@ -16,13 +18,18 @@ import {NavbarComponent} from './navbar/navbar.component';
     NgIf,
     PokemonCardsListItemComponent,
     PokemonCardsListComponent,
-    NavbarComponent
+    NavbarComponent,
+    UpperCasePipe,
+    CurrencyPipe,
+    DataPipePipe,
+    NgClass,
+    NgStyle
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  PokemonCards!: PokemonCards;
+  PokemonCards!: PokemonCards[];
 
   constructor(private pokemonCardsService: PokemonCardsService) {}
 
@@ -31,10 +38,12 @@ export class AppComponent implements OnInit {
 
     this.pokemonCardsService.getPokemonCardsById(PokemonCardsId).subscribe(card => {
       if (card) {
-        this.PokemonCards = card;
+        this.PokemonCards = [card];  // Assuming the service returns a single card, wrap it in an array
       } else {
         console.error('Card not found');
       }
     });
   }
+
+  protected readonly PokemonCardsList = PokemonCardsList;
 }
