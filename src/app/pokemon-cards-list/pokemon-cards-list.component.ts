@@ -4,6 +4,8 @@ import { PokemonCardsService } from '../service/Pokemon-Cards-service.service';
 import { PokemonCards } from '../project.interface';
 import {PokemonCardsListItemComponent} from "../pokemon-cards-list-item/pokemon-cards-list-item.component";
 import {CurrencyPipe, NgClass, NgForOf, NgStyle, UpperCasePipe} from "@angular/common";
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-pokemon-cards-list',
@@ -15,7 +17,9 @@ import {CurrencyPipe, NgClass, NgForOf, NgStyle, UpperCasePipe} from "@angular/c
     NgStyle,
     CurrencyPipe,
     NgForOf,
-    UpperCasePipe
+    UpperCasePipe,
+    MatCardModule,
+    MatButtonModule
   ],
   styleUrls: ['./pokemon-cards-list.component.css']
 })

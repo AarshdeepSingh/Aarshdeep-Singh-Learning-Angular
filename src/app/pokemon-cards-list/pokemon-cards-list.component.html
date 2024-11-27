@@ -4,17 +4,17 @@
 </head>
 <body>
 
-<div *ngFor="let card of PokemonCardsList; let i = index" [ngClass]="{'even': i % 2 === 0, 'odd': i % 2 !== 0}">
-  <app-pokemon-cards-list-item [pokemonCards]="card" [ngStyle]="{'background-color': i % 2 === 0 ? 'red' : 'blue'}">
-  </app-pokemon-cards-list-item>
-  <p>Name: {{ card.name | uppercase}}</p>
-  <p>Price: {{ card.price | currency }}</p>
+<!--<div *ngFor="let card of PokemonCardsList; let i = index" [ngClass]="{'even': i % 2 === 0, 'odd': i % 2 !== 0}">-->
+<!--  <app-pokemon-cards-list-item [pokemonCards]="card" [ngStyle]="{'background-color': i % 2 === 0 ? 'red' : 'blue'}">-->
+<!--  </app-pokemon-cards-list-item>-->
+<!--  <p>Name: {{ card.name | uppercase}}</p>-->
+<!--  <p>Price: {{ card.price | currency }}</p>-->
 
-  <button (click)="editItem(card)">Edit</button>
-  <button (click)="deleteItem(card.id)">Delete</button>
-</div>
+<!--  <button (click)="editItem(card)">Edit</button>-->
+<!--  <button (click)="deleteItem(card.id)">Delete</button>-->
+<!--</div>-->
 
-<button (click)="goToAddItem()">Add New Item</button>
+<button mat-raised-button color="red" (click)="goToAddItem()">Add New Item</button>
 
 </body>
 </html>
