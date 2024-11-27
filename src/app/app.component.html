@@ -1,17 +1,27 @@
-<!-- Aarshdeep Singh 0838091 -->
+<mat-toolbar color="primary">
+  <span class="spacer"></span>
+  <a mat-button routerLink="/">Home</a>
+  <a mat-button routerLink="/modify">Modify List</a>
+</mat-toolbar>
 
-<div>
-  <app-navbar></app-navbar>
+<div class="content">
+  <h2>All Pokémon Cards</h2>
 
-  <h1>Pokemon Cards Collection</h1>
-</div>
-
-<div *ngFor="let card of PokemonCardsList; let i = index" [ngClass]="{'even': i % 2 === 0, 'odd': i % 2 !== 0}">
-  <app-pokemon-cards-list-item [pokemonCards]="card" [ngStyle]="{'background-color': i % 2 === 0 ? 'red' : 'blue'}">
-  </app-pokemon-cards-list-item>
-  <p [innerHTML]="card.name | boldCardName">Name: {{ card.name | uppercase}}</p>
-  <p>Price: {{ card.price | currency }}</p>
-
+  <div class="card-container">
+    <mat-card *ngFor="let card of PokemonCardsList" class="custom-card">
+      <mat-card-header>
+        <mat-card-title [innerHTML]="card.name | boldCardName"></mat-card-title>
+        <mat-card-subtitle>Price: {{ card.price | currency }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Description: {{ card.description }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Buy Now</button>
+        <button mat-raised-button color="warn">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

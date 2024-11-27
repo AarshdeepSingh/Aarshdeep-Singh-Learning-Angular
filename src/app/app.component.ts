@@ -9,6 +9,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {DataPipePipe} from "./data-pipe.pipe";
 import {PokemonCardsList} from "./Data/Pokemon-Cards-content";
 import {BoldCardNamePipe} from "./bold-card-name.pipe";
+import {MatCardModule} from "@angular/material/card";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-root',
@@ -25,7 +28,10 @@ import {BoldCardNamePipe} from "./bold-card-name.pipe";
     DataPipePipe,
     NgClass,
     NgStyle,
-    BoldCardNamePipe
+    BoldCardNamePipe,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

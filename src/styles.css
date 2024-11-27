@@ -20,3 +20,12 @@ button {
   color: white;
   border-radius: 5px;
 }
+
+mat-card.custom-card {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
