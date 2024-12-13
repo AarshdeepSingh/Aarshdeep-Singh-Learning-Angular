@@ -26,3 +26,340 @@
 
 <router-outlet></router-outlet>
 <app-pokemon-cards-list></app-pokemon-cards-list>
+
+
+
+<!--
+
+https://github.com/mathewhaug/MAD307F24FinalReview/tree/Final-Review-Solution
+
+----------------------------boolean pipe--------------------------------------------------
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'isGoodBoy'
+})
+export class IsGoodBoyPipe implements PipeTransform {
+  // Define the transform function
+  transform(value: boolean): string {
+    return value ? 'Good Boy' : 'Bad Boy';
+  }
+}
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  standalone: true,
+  name: 'experiencePipe'
+})
+export class ExperiencePipePipe implements PipeTransform {
+
+  transform(experience: number): String {
+    return experience > 0 ? `${experience} years of experience` : `new sitter`;
+  }
+
+}
+
+
+-------------------------------------------------------component.ts for form--------------------------------------------------------
+
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-modify-sitter-component',
+  standalone: true,
+  imports: [ReactiveFormsModule], // Include ReactiveFormsModule
+  templateUrl: './modify-sitter-component.component.html',
+  styleUrls: ['./modify-sitter-component.component.scss']
+})
+export class ModifySitterComponentComponent {
+  sitterForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    // Initialize the reactive form with controls and validators
+    this.sitterForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      age: ['', [Validators.required, Validators.min(18), Validators.max(65)]],
+      experience: ['', [Validators.required, Validators.min(0)]],
+      specialty: ['', [Validators.required]],
+      availability: ['', [Validators.required]]
+    });
+  }
+
+   ngOnInit(): void {
+
+    const sitterId = this.route.snapshot.paramMap.get('id');
+    if (sitterId) {
+      this.isNewSitter = false;
+      this.sitter = SITTERS.find(s => s.id === +sitterId);
+      if (this.sitter) {
+        this.sitterForm.patchValue(this.sitter);
+      }
+    }
+  }
+
+  // Submit handler for the form
+  onSubmit(): void {
+    if (this.sitterForm.valid) {
+      const sitterData = this.sitterForm.value;
+      console.log('Form Submitted Successfully:', sitterData);
+
+      // Logic for adding or updating sitter
+      // Example: API call or updating a local list
+    } else {
+      this.sitterForm.markAllAsTouched(); // Mark all fields as touched to trigger validation messages
+    }
+  }
+
+  // Convenience getters for accessing form controls
+  get name() {
+    return this.sitterForm.get('name');
+  }
+
+  get age() {
+    return this.sitterForm.get('age');
+  }
+
+  get experience() {
+    return this.sitterForm.get('experience');
+  }
+
+  get specialty() {
+    return this.sitterForm.get('specialty');
+  }
+
+  get availability() {
+    return this.sitterForm.get('availability');
+  }
+}
+
+  onSubmit(): void {
+    if (this.sitterForm.valid) {
+      if (this.isNewSitter) {
+        // Adding new sitter logic
+        const newSitter: PetSitter = {
+          ...this.sitterForm.value, id: SITTERS.length + 1,
+        };
+        SITTERS.push(newSitter);
+      } else {
+        // Updating existing sitter logic
+        if (this.sitter) {
+          this.sitter = { ...this.sitterForm.value, id: this.sitter.id };
+          //Type assertion, to work around my null error
+          const index = SITTERS.findIndex(s => s.id === (this.sitter as PetSitter).id);
+          if (index !== -1) {
+            // Update the sitter in the array only if it's found + Type assertion
+            SITTERS[index] = { ...this.sitterForm.value, id: (this.sitter as PetSitter).id };
+          }
+        }
+      }
+
+      this.router.navigate(['/sitters']);
+    }
+  }
+}
+
+----------------------------form---------------------------------------------------------
+
+  <form [formGroup]="sitterForm" (ngSubmit)="onSubmit()">
+
+  <label for="name">Name:</label>
+  <input id="name" formControlName="name" type="text" />
+  <div *ngIf="name?.invalid && name?.touched">
+    <small *ngIf="name?.errors?.['required']">Name is required.</small>
+    <small *ngIf="name?.errors?.['minlength']">Name must be at least 2 characters.</small>
+  </div>
+
+  <label for="age">Age:</label>
+  <input id="age" formControlName="age" type="number" />
+  <div *ngIf="age?.invalid && age?.touched">
+    <small *ngIf="age?.errors?.['required']">Age is required.</small>
+    <small *ngIf="age?.errors?.['min']">Age must be at least 18.</small>
+    <small *ngIf="age?.errors?.['max']">Age must be 65 or less.</small>
+  </div>
+
+
+  <label for="experience">Experience (years):</label>
+  <input id="experience" formControlName="experience" type="number" />
+  <div *ngIf="experience?.invalid && experience?.touched">
+    <small *ngIf="experience?.errors?.['required']">Experience is required.</small>
+    <small *ngIf="experience?.errors?.['min']">Experience must be at least 0 years.</small>
+  </div>
+
+
+  <label for="specialty">Specialty:</label>
+  <input id="specialty" formControlName="specialty" type="text" />
+  <div *ngIf="specialty?.invalid && specialty?.touched">
+    <small *ngIf="specialty?.errors?.['required']">Specialty is required.</small>
+  </div>
+
+
+  <label for="availability">Availability:</label>
+  <input id="availability" formControlName="availability" type="text" />
+  <div *ngIf="availability?.invalid && availability?.touched">
+    <small *ngIf="availability?.errors?.['required']">Availability is required.</small>
+  </div>
+
+
+  <button type="submit" [disabled]="sitterForm.invalid">Submit</button>
+  </form>
+
+
+
+
+
+  Materials
+
+  ng add @angular/material
+
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let sitter">{{ sitter.name }}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef>Age</th>
+    <td mat-cell *matCellDef="let sitter">{{ sitter.age }}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="specialty">
+    <th mat-header-cell *matHeaderCellDef>Specialty</th>
+    <td mat-cell *matCellDef="let sitter">{{ sitter.specialty }}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let sitter">
+      <button mat-button color="primary" (click)="editSitter(sitter)">Edit</button>
+      <button mat-button color="warn" (click)="deleteSitter(sitter)">Delete</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+
+  Material for sitter details (Mat-card)
+
+  <mat-card>
+  <mat-card-header>
+    <mat-card-title>Sitter Details</mat-card-title>
+  </mat-card-header>
+
+    <mat-card-content>
+      <div *ngIf="sitter" class="sitter-detail">
+
+  <h2 appHighlight>{{ sitter.name }}</h2>
+
+  <div class="sitter-info">
+    <p><strong>Age:</strong> {{ sitter.age | age }} years</p>
+    <p><strong>Experience:</strong> {{ sitter.experience }} years</p>
+    <p><strong>Specialty:</strong> {{ sitter.specialty }}</p>
+    <p><strong>Rating:</strong> {{ sitter.rating | ratingPipe }} stars</p>
+
+
+    <p><strong>Availability:</strong> <span [appSitterStatus]="sitter.available"></span></p>
+  </div>
+
+  <div class="sitter-photo" *ngIf="sitter.photo">
+    <p><strong>Photo:</strong></p>
+    <img [src]="sitter.photo" alt="{{ sitter.name }}'s photo" class="sitter-photo-img"/>
+  </div>
+  </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <a routerLink="/sitters" mat-button class="back-link">Back to Sitters</a>
+  </mat-card-actions>
+  </mat-card>
+
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Pet Sitters</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+  <button mat-raised-button color="primary" (click)="navigateToAddSitter()">Add New Sitter</button>
+
+
+  <div class="filters" style="margin-top: 16px;">
+    <mat-form-field appearance="fill">
+      <mat-label>Specialty</mat-label>
+      <mat-select>
+        <mat-option value="">All</mat-option>
+        <mat-option value="Dogs">Dogs</mat-option>
+        <mat-option value="Cats">Cats</mat-option>
+        <mat-option value="Birds">Birds</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Availability</mat-label>
+      <mat-select>
+        <mat-option value="">All</mat-option>
+        <mat-option [value]="true">Available</mat-option>
+        <mat-option [value]="false">Unavailable</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <div class="sitter-list">
+    <mat-grid-list cols="4" rowHeight="4:3" gutterSize="5px">
+      <mat-grid-tile *ngFor="let sitter of sitters">
+        <mat-card class="sitter-card">
+          <mat-card-header>
+            <mat-card-title>{{ sitter.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p><strong>Specialty:</strong> {{ sitter.specialty }}</p>
+            <p><strong>Rating:</strong> {{ sitter.rating }}</p>
+            <p><strong>Avail: </strong> <span [appSitterStatus]="sitter.available"></span></p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button [routerLink]="'/sitters/' + sitter.id">View Details</button>
+            <button mat-raised-button color="accent" (click)="navigateToModifySitter(sitter.id)">Edit</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  </mat-card-content>
+  </mat-card>
+
+
+  directives - highlight
+
+  import {Directive, ElementRef, HostListener, Renderer2} from '@angular/core';
+
+@Directive({
+  standalone: true,
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  @HostListener('mouseenter') onMouseEnter() {
+    this.renderer.addClass(this.el.nativeElement, 'highlight');
+  }
+
+  @HostListener('mouseleave') onMouseLeave() {
+    this.renderer.removeClass(this.el.nativeElement, 'highlight');
+  }
+}
+
+
+
+
+-->
